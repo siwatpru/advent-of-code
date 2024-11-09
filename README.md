@@ -1,3 +1,3 @@
-# Advent of Code 2020
+# Advent of Code
 
 My solutions for the Advent of Code puzzles.
