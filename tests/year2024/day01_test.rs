@@ -1,13 +1,13 @@
 use aoc::year2024::day01;
 
 #[test]
-fn test_part1_example() {
-    let example_input = "line1\nline2\nline3";
-    assert_eq!(day01::solve_part1(example_input), 42);
+fn test_part1() {
+    let input = "line1\nline2\nline3";
+    assert_eq!(day01::solve_part1(input), 42);
 }
 
 #[test]
-fn test_part2_example() {
-    let example_input = "line1\nline2\nline3";
-    assert_eq!(day01::solve_part2(example_input), 84);
+fn test_part2() {
+    let input = "line1\nline2\nline3";
+    assert_eq!(day01::solve_part2(input), 84);
 }
