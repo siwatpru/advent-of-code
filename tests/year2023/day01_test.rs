@@ -2,12 +2,21 @@ use aoc::year2023::day01;
 
 #[test]
 fn test_part1() {
-    let example_input = "1abc2\npqr3stu8vwx\na1b2c3d4e5f\ntreb7uchet";
-    assert_eq!(day01::solve_part1(example_input), 142);
+    let input = "1abc2\n\
+        pqr3stu8vwx\n\
+        a1b2c3d4e5f\n\
+        treb7uchet";
+    assert_eq!(day01::solve_part1(input), 142);
 }
 
 #[test]
-fn test_part2_example() {
-    let example_input = "line1\nline2\nline3";
-    assert_eq!(day01::solve_part2(example_input), 84);
+fn test_part2() {
+    let input = "two1nine\n\
+        eightwothree\n\
+        abcone2threexyz\n\
+        xtwone3four\n\
+        4nineeightseven2\n\
+        zoneight234\n\
+        7pqrstsixteen";
+    assert_eq!(day01::solve_part2(input), 281);
 }
