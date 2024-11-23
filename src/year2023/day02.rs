@@ -1,5 +1,4 @@
 use regex::Regex;
-// use std::collections::HashMap;
 
 #[derive(Debug)]
 struct Turn {
@@ -32,21 +31,28 @@ fn parse_input(input: &str) -> Vec<Game> {
 
         let turn_re = Regex::new(r"(\d+)\s+(\w+)").unwrap();
         for turn in turns_data.split(";") {
+            let mut current_turn = Turn {
+                red: 0,
+                blue: 0,
+                green: 0,
+            };
+
             for turn_cap in turn_re.captures_iter(turn.trim()) {
                 let score: u32 = turn_cap[1].parse().unwrap();
                 let color = &turn_cap[2];
 
-                let turn = Turn {
-                    red: if color == "red" { score } else { 0 },
-                    blue: if color == "blue" { score } else { 0 },
-                    green: if turn == "green" { score } else { 0 },
-                };
-
-                game.turns.push(turn)
+                match color {
+                    "red" => current_turn.red += score,
+                    "blue" => current_turn.blue += score,
+                    "green" => current_turn.green += score,
+                    _ => panic!("Unexpected color: {}", color),
+                }
             }
+
+            game.turns.push(current_turn);
         }
 
-        games.push(game)
+        games.push(game);
     }
 
     games
@@ -63,7 +69,7 @@ pub fn solve_part1(input: &str) -> u32 {
 
     for game in games {
         let mut is_possible = true;
-        for turn in game.turns {
+        for turn in &game.turns {
             if turn.red > max_red || turn.green > max_green || turn.blue > max_blue {
                 is_possible = false;
                 println!("Game {}: impossible because {:?}", game.id, turn);
