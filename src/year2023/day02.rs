@@ -52,22 +52,6 @@ fn parse_input(input: &str) -> Vec<Game> {
     games
 }
 
-fn sum_turn(turns: &Vec<Turn>) -> Turn {
-    let mut sum = Turn {
-        red: 0,
-        blue: 0,
-        green: 0,
-    };
-
-    for turn in turns {
-        sum.red += turn.red;
-        sum.green += turn.green;
-        sum.blue += turn.blue;
-    }
-
-    sum
-}
-
 pub fn solve_part1(input: &str) -> u32 {
     let max_red = 12;
     let max_green = 13;
@@ -78,12 +62,16 @@ pub fn solve_part1(input: &str) -> u32 {
     let games = parse_input(input);
 
     for game in games {
-        let sum = sum_turn(&game.turns);
-        println!("{}, {:?}", game.id, sum);
-
-        if sum.red > max_red || sum.green > max_green || sum.blue > max_blue {
-            continue;
-        } else {
+        let mut is_possible = true;
+        for turn in game.turns {
+            if turn.red > max_red || turn.green > max_green || turn.blue > max_blue {
+                is_possible = false;
+                println!("Game {}: impossible because {:?}", game.id, turn);
+                break;
+            }
+        }
+        if is_possible {
+            println!("Game {}: ok", game.id);
             output += game.id;
         }
     }
