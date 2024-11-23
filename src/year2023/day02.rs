@@ -72,18 +72,38 @@ pub fn solve_part1(input: &str) -> u32 {
         for turn in &game.turns {
             if turn.red > max_red || turn.green > max_green || turn.blue > max_blue {
                 is_possible = false;
-                println!("Game {}: impossible because {:?}", game.id, turn);
+                // println!("Game {}: impossible because {:?}", game.id, turn);
                 break;
             }
         }
         if is_possible {
-            println!("Game {}: ok", game.id);
+            // println!("Game {}: ok", game.id);
             output += game.id;
         }
     }
     output
 }
 
-pub fn solve_part2(_input: &str) -> u32 {
-    0
+pub fn solve_part2(input: &str) -> u32 {
+    let mut output = 0;
+
+    let games = parse_input(input);
+
+    for game in games {
+        let mut min_red = 1;
+        let mut min_green = 1;
+        let mut min_blue = 1;
+
+        for turn in &game.turns {
+            min_red = min_red.max(turn.red);
+            min_green = min_green.max(turn.green);
+            min_blue = min_blue.max(turn.blue);
+        }
+
+        let power = min_red * min_green * min_blue;
+
+        output += power;
+    }
+
+    output
 }
