@@ -1,0 +1,80 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'aoc'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=aoc"
+                ],
+                "filter": {
+                    "name": "aoc",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'aoc'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=aoc",
+                    "--package=aoc"
+                ],
+                "filter": {
+                    "name": "aoc",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'aoc'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=aoc",
+                    "--package=aoc"
+                ],
+                "filter": {
+                    "name": "aoc",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'lib'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=lib",
+                    "--package=aoc"
+                ],
+                "filter": {
+                    "name": "lib",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
