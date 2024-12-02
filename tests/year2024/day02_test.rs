@@ -19,5 +19,5 @@ fn test_part2() {
 1 3 2 4 5
 8 6 4 4 1
 1 3 6 7 9";
-    assert_eq!(day02::solve_part2(input), 2);
+    assert_eq!(day02::solve_part2(input), 4);
 }
