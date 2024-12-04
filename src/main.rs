@@ -5,7 +5,7 @@ mod year2024;
 
 fn main() {
     // Define available years and days
-    let years = vec![(2023, vec![1, 2, 3]), (2024, vec![1, 2, 3])];
+    let years = vec![(2023, vec![1, 2, 3]), (2024, vec![1, 2, 3, 4])];
 
     // Read command-line arguments
     let args: Vec<String> = env::args().collect();
@@ -80,6 +80,10 @@ fn run_solution(year: u32, day: u8) {
         (2024, 3) => {
             println!("Part 1: {}", year2024::day03::solve_part1(&input));
             println!("Part 2: {}", year2024::day03::solve_part2(&input));
+        }
+        (2024, 4) => {
+            println!("Part 1: {}", year2024::day04::solve_part1(&input));
+            println!("Part 2: {}", year2024::day04::solve_part2(&input));
         }
         _ => {
             println!("Solution for Year {} Day {} not implemented", year, day);
