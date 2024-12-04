@@ -27,5 +27,5 @@ SMSMSASXSS
 SAXAMASAAA
 MAMMMXMMMM
 MXMXAXMASX";
-    assert_eq!(day04::solve_part2(input), 18);
+    assert_eq!(day04::solve_part2(input), 9);
 }
