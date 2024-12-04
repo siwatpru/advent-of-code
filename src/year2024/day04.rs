@@ -13,100 +13,37 @@ const SEARCH_WORD: &str = "XMAS";
 fn search(strings: &Vec<Vec<char>>, row: usize, col: usize) -> i32 {
     let mut count = 0;
 
-    //Search up
-    let mut word = String::new();
-    for i in 0..SEARCH_WORD.len() {
-        if row < i {
-            break;
-        }
-        word.push(strings[row - i][col]);
-    }
-    if word == SEARCH_WORD {
-        count += 1;
-    }
+    // Define directions for searching: (row_offset, col_offset)
+    let directions: [(isize, isize); 8] = [
+        (1, 0),   // down
+        (-1, 0),  // up
+        (0, 1),   // right
+        (0, -1),  // left
+        (1, 1),   // down-right diagonal
+        (1, -1),  // down-left diagonal
+        (-1, 1),  // up-right diagonal
+        (-1, -1), // up-left diagonal
+    ];
 
-    // Search down
-    let mut word = String::new();
-    for i in 0..SEARCH_WORD.len() {
-        if row + i >= strings.len() {
-            break;
-        }
-        word.push(strings[row + i][col]);
-    }
-    if word == SEARCH_WORD {
-        count += 1;
-    }
+    for (row_offset, col_offset) in directions.iter() {
+        let mut word = String::new();
+        for i in 0..SEARCH_WORD.len() {
+            let new_row = row as isize + i as isize * *row_offset;
+            let new_col = col as isize + i as isize * *col_offset;
 
-    // Search left
-    let mut word = String::new();
-    for i in 0..SEARCH_WORD.len() {
-        if col < i {
-            break;
+            // Check bounds
+            if new_row < 0
+                || new_row >= strings.len() as isize
+                || new_col < 0
+                || new_col >= strings[new_row as usize].len() as isize
+            {
+                break;
+            }
+            word.push(strings[new_row as usize][new_col as usize]);
         }
-        word.push(strings[row][col - i]);
-    }
-    if word == SEARCH_WORD {
-        count += 1;
-    }
-
-    // Search right
-    let mut word = String::new();
-    for i in 0..SEARCH_WORD.len() {
-        if col + i >= strings[row].len() {
-            break;
+        if word == SEARCH_WORD {
+            count += 1;
         }
-        word.push(strings[row][col + i]);
-    }
-    if word == SEARCH_WORD {
-        count += 1;
-    }
-
-    // Search up+right diagonal
-    let mut word = String::new();
-    for i in 0..SEARCH_WORD.len() {
-        if row < i || col + i >= strings[row].len() {
-            break;
-        }
-        word.push(strings[row - i][col + i]);
-    }
-    if word == SEARCH_WORD {
-        count += 1;
-    }
-
-    // Search up+left diagonal
-    let mut word = String::new();
-    for i in 0..SEARCH_WORD.len() {
-        if row < i || col < i {
-            break;
-        }
-        word.push(strings[row - i][col - i]);
-    }
-    if word == SEARCH_WORD {
-        count += 1;
-    }
-
-    // Search down+right diagonal
-    let mut word = String::new();
-    for i in 0..SEARCH_WORD.len() {
-        if row + i >= strings.len() || col + i >= strings[row].len() {
-            break;
-        }
-        word.push(strings[row + i][col + i]);
-    }
-    if word == SEARCH_WORD {
-        count += 1;
-    }
-
-    // Search down+left diagonal
-    let mut word = String::new();
-    for i in 0..SEARCH_WORD.len() {
-        if row + i >= strings.len() || col < i {
-            break;
-        }
-        word.push(strings[row + i][col - i]);
-    }
-    if word == SEARCH_WORD {
-        count += 1;
     }
 
     count
@@ -130,6 +67,6 @@ pub fn solve_part1(input: &str) -> i32 {
     count
 }
 
-pub fn solve_part2(input: &str) -> i32 {
+pub fn solve_part2(_input: &str) -> i32 {
     18
 }
